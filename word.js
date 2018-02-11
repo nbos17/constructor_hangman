@@ -1,9 +1,9 @@
 var Letter = require('./Letter');
 
-var Word = function(w, char) {
+var Word = function(w) {
 	this.chosenWordArray = w.split('');
 	this.words = [];
-	this.character = char;
+	//this.character = char;
 
 	// create blanks for word
 	this.blankWords = function() {
@@ -19,23 +19,27 @@ var Word = function(w, char) {
 	}
 
 	//check if correct guess
-	this.checkCharacters = function() {
+	this.checkCharacters = function(c) {
 		console.log(this.chosenWordArray);
-		console.log(this.character);
+
+		this.character = c;
+
 		if (this.chosenWordArray.indexOf(this.character) > -1) {
-		console.log("Winner winner chicken dinner");
+		
 			for (var i = 0; i < this.chosenWordArray.length; i++) {
+
 				if (this.chosenWordArray[i] === this.character) {
+
 					this.words[i] = this.character;
-					console.log(this.words.join(' '));
+
+					
 				}
-
-
 				// var newWord = new Letter(this.chosenWordArray[i]);
 				// newWord.display = true;
 				// newWord.letterDisplay();
 				// console.log(newWord);
 			}
+			console.log(this.words.join(' '));
 		}
 		else {
 			console.log("you suck");
@@ -44,6 +48,8 @@ var Word = function(w, char) {
 
 }
 
-var mine = new Word('today', "t");
+var mine = new Word('todooooy');
 mine.blankWords();
-mine.checkCharacters();
+mine.checkCharacters('o');
+mine.checkCharacters('o');
+
