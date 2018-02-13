@@ -1,17 +1,12 @@
 var Letter = require('./Letter');
 var inquirer = require('inquirer');
-var int = 0;
-
-//corect guesses
-//incorrect guesses
-//finish word
-
 
 
 var Word = function(w) {
 	this.chosenWordArray = w.split('');
 	this.words = [];
 	this.correctGuess = 0;
+	this.lettersGuessed = [];
 
 	//Loop through chosenword array
 	for (var i = 0; i < this.chosenWordArray.length; i++) {
@@ -20,13 +15,19 @@ var Word = function(w) {
 		
 	}
 
+	//checks if word is complete
+	this.isWordComplete = function() {
+		for (var i = 0; i < this.words.length; i++) {
+			if(!this.words[i].display) return false;
+			}
+			return true;
+	}
+
 
 	//check if correct guess
 	this.checkCharacters = function(c) {
-		console.log(this.chosenWordArray);
 
 		this.character = c;
-
 
 		if (this.chosenWordArray.indexOf(this.character) > -1) {
 		
@@ -34,15 +35,9 @@ var Word = function(w) {
 
 				if (this.words[i].letter === this.character) {
 
-					//this.words[i] = this.character;
 
 					this.words[i].display = true;
 
-					console.log(this.words[i]);
-
-					this.correctGuess++;
-
-					
 				}
 
 			}
@@ -64,41 +59,26 @@ var Word = function(w) {
 	  	console.log(output);
 	}
 
-
-
-}
-
-var mine = new Word('todoy');
-promptLetters();
-
-function promptLetters() {
-	if (int < 5) {
-
-		inquirer.prompt([
-			{type : "input",
-			name: "pickLetter",
-			message: "Choose a Letter: "
-			}
-		])
-		.then(function(guess) {
+	this.duplicate = function(c) {
+		this.character = c;
+		if (this.lettersGuessed.indexOf(this.character) != -1) {
+			console.log("not working");
+			return false;
 			
-			console.log(guess.pickLetter);
-
-
-		mine.checkCharacters(guess.pickLetter);
-		mine.showWords();
+		}
+		else {
 		
-		int++;
-		promptLetters();
+		this.lettersGuessed.push(this.character);
+		console.log("this maybe working");
+		}
+		
+		
+	}
 
-		});
-	}
-	else {
-		return;
-	}
 
 
 }
+
 
 
 
