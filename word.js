@@ -44,7 +44,7 @@ var Word = function(w) {
 			
 		}
 		else {
-			console.log("you suck");
+			console.log("Incorrect Guess" + "\n");
 		}
 	}
 
@@ -56,20 +56,20 @@ var Word = function(w) {
 	    output += this.words[i].letterDisplay();
 
 	  	}
-	  	console.log(output);
+	  	console.log(output + "\n");
 	}
 
 	this.duplicate = function(c) {
 		this.character = c;
 		if (this.lettersGuessed.indexOf(this.character) != -1) {
-			console.log("not working");
+			//console.log("not working");
 			return false;
 			
 		}
 		else {
 		
 		this.lettersGuessed.push(this.character);
-		console.log("this maybe working");
+		//console.log("this maybe working");
 		}
 		
 		

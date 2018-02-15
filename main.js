@@ -1,14 +1,24 @@
 var Word = require('./Word');
 var inquirer = require('inquirer');
 
-var wordList = ["today", "hello", "favorite"];
+var wordList = ["today", "hello", "favorite", "minnesota", "curling"];
 
-var newWord = wordList[Math.floor(Math.random() * wordList.length)];
+var newWord = "";
+var min = {};
 
-var mine = new Word(newWord);
-console.log(mine);
 var guesses = 12;
+console.log(wordList.length);
+
+chooseWord();
 promptLetters();
+
+
+function chooseWord() {
+
+	newWord = wordList[Math.floor(Math.random() * wordList.length)];
+
+	mine = new Word(newWord);
+}
 
 function promptLetters() {
 	if (mine.isWordComplete() === false) {
@@ -24,22 +34,32 @@ function promptLetters() {
 				
 				console.log(guess.pickLetter);
 				guesses--;
-				console.log("You have " + guesses + " left");
-
-
-
-				mine.checkCharacters(guess.pickLetter);
-				if (mine.duplicate(guess.pickLetter) === false) {
-					console.log("already Guessed")
+				console.log("You have " + guesses + " guesses left" + "\n");
+				if (guesses === 0) {
+					console.log("You are out of guesses. Relaunch Game to Play Again");
 				}
-				//mine.showWords();
-				promptLetters();
+				else {
+
+
+
+					mine.checkCharacters(guess.pickLetter);
+					if (mine.duplicate(guess.pickLetter) === false) {
+						console.log("Already Guessed")
+						guesses++;
+					}
+					//mine.showWords();
+					promptLetters();
+				}
 
 			});
 		
 	}	
 	else {
-		console.log("YOU WIN");
+		console.log("YOU WIN!!!!!!!!!!!!" + "\n");
+		chooseWord();
+		guesses = 12;
+		promptLetters();
+
 	}
 
 
